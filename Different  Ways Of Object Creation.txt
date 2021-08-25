@@ -1,0 +1,63 @@
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+public class WaysOfObjectCreation {
+
+	public static void main(String[] args)  {
+		
+		//first way
+		WaysOfObjectCreation way1=new WaysOfObjectCreation();
+		
+		//second way
+		try {
+			WaysOfObjectCreation way2=(WaysOfObjectCreation)Class.
+					forName("WaysOfObjectCreation").newInstance();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
+		//third way
+		
+		Constructor<WaysOfObjectCreation> constructor = null;
+		try {
+			constructor = WaysOfObjectCreation.class.
+					getConstructor();
+		} catch (NoSuchMethodException | SecurityException e1) {
+			
+			e1.printStackTrace();
+		}
+		try {
+			WaysOfObjectCreation way3=constructor.newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e1) {
+			e1.printStackTrace();
+		}
+		
+		//fourth way
+		try {
+			WaysOfObjectCreation way4=(WaysOfObjectCreation) way1.clone();
+		} catch (CloneNotSupportedException e) {
+			//e.printStackTrace();
+//			log.info())
+			System.out.println(e.getStackTrace());
+		}
+		
+		// fifth way
+		// Using Deserialisation with File Handling
+//		try
+//	    {
+//	      FileInputStream inputStream = new  FileInputStream("file path");
+//	      ObjectInputStream in = new ObjectInputStream(inputStream);
+//	      way5 = (WaysOfObjectCreation) in.readObject(); or 
+//		  WaysOfObjectCreation way5=(MyObject) objectInputStream.readObject();
+//	    } catch (Exception e)
+//	    {
+//	      e.printStackTrace();
+//	    }
+
+		
+		
+		
+	}
+
+}
